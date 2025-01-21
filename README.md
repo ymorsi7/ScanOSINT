@@ -12,7 +12,7 @@ A powerful OSINT (Open Source Intelligence) scanning tool that helps gather and 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ScanOSINT.git
+git clone https://github.com/ymorsi7/ScanOSINT.git
 cd ScanOSINT
 ```
 
