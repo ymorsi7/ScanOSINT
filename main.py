@@ -9,13 +9,34 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from datetime import datetime, timedelta
 
-# Page configuration
+# Enforce dark theme
 st.set_page_config(
     page_title="Emergency Preparedness Platform",
-    page_icon="assets/alert-icon.svg",
+    page_icon="🚨",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
 )
+
+# Force dark theme
+st.markdown("""
+    <script>
+        var checkDarkMode = function() {
+            if (!document.body.classList.contains('dark')) {
+                document.body.classList.add('dark');
+            }
+        };
+
+        if (window.addEventListener) {
+            window.addEventListener('load', checkDarkMode);
+            window.addEventListener('resize', checkDarkMode);
+        }
+    </script>
+""", unsafe_allow_html=True)
 
 # Custom CSS including accessibility styles
 with open('assets/custom.css') as f:
@@ -24,7 +45,9 @@ with open('assets/custom.css') as f:
 # Accessibility Settings in Sidebar
 with st.sidebar:
     st.markdown("""
-    <img src="assets/alert-icon.svg" alt="Emergency Alert Icon" class="sidebar-icon" role="img">
+    <div class="emergency-icon" role="img" aria-label="Emergency Alert Icon">
+        🚨
+    </div>
     """, unsafe_allow_html=True)
     st.markdown("""<h1 role="banner" tabindex="0">Emergency Preparedness</h1>""", unsafe_allow_html=True)
 

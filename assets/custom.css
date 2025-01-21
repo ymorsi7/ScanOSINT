@@ -1,3 +1,31 @@
+/* Force dark theme */
+body {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Dark theme variables */
+:root {
+    color-scheme: dark;
+    --primary-color: #ff4b4b;
+    --background-color: #0e1117;
+    --secondary-background: #1a1c23;
+    --text-color: #fafafa;
+    --border-color: #2d2d2d;
+}
+
+/* Dark mode overrides */
+[data-testid="stAppViewContainer"], 
+[data-testid="stSidebarContent"],
+[data-testid="stHeader"] {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+.stApp {
+    background-color: var(--background-color) !important;
+}
+
 /* Custom styling for the emergency preparedness platform */
 
 /* Accessibility Base Styles */
@@ -5,8 +33,29 @@
     --primary-color: #ff4b4b;
     --background-color: #0e1117;
     --secondary-background: #1a1c23;
-    --text-color: #ffffff;
+    --text-color: #fafafa;
     --border-color: #2d2d2d;
+}
+
+/* Emergency Icon Styling */
+.emergency-icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+    color: var(--primary-color);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* High Contrast Mode */
@@ -49,6 +98,16 @@
 /* Main container */
 .main {
     background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Override Streamlit's default light theme */
+.stApp {
+    background-color: var(--background-color);
+}
+
+.stSidebar {
+    background-color: var(--secondary-background);
 }
 
 /* Headers with proper contrast */
@@ -105,6 +164,7 @@ h1, h2, h3 {
     background-color: var(--secondary-background);
     border-radius: 4px;
     min-height: 44px;
+    color: var(--text-color);
 }
 
 /* Alerts with High Contrast */
@@ -162,10 +222,14 @@ footer {
     padding: 1rem;
 }
 
-
 /* Expander */
 .streamlit-expanderHeader {
     background-color: var(--secondary-background);
     border: 1px solid var(--border-color);
     border-radius: 4px;
+}
+
+/* Dark mode specific overrides */
+.stMarkdown, .stText {
+    color: var(--text-color) !important;
 }
