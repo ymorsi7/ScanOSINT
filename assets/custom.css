@@ -1,38 +1,92 @@
 /* Custom styling for the emergency preparedness platform */
 
+/* Accessibility Base Styles */
+:root {
+    --primary-color: #ff4b4b;
+    --background-color: #0e1117;
+    --secondary-background: #1a1c23;
+    --text-color: #ffffff;
+    --border-color: #2d2d2d;
+}
+
+/* High Contrast Mode */
+[data-high-contrast="true"] {
+    --primary-color: #ff0000;
+    --background-color: #000000;
+    --secondary-background: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+}
+
+/* Large Text Mode */
+[data-large-text="true"] {
+    font-size: 120%;
+    line-height: 1.5;
+}
+
+/* Focus Styles for Accessibility */
+*:focus {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* Skip Navigation Link */
+.skip-nav {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-nav:focus {
+    top: 0;
+}
+
 /* Main container */
 .main {
-    background-color: #0e1117;
+    background-color: var(--background-color);
 }
 
-/* Headers */
+/* Headers with proper contrast */
 h1, h2, h3 {
-    color: #ffffff;
+    color: var(--text-color);
     font-weight: 600;
+    margin: 1em 0 0.5em 0;
 }
 
-/* Metrics */
+/* Metrics with enhanced readability */
 .stMetric {
-    background-color: #1a1c23;
+    background-color: var(--secondary-background);
     padding: 1rem;
     border-radius: 8px;
-    border: 1px solid #2d2d2d;
+    border: 2px solid var(--border-color);
 }
 
-.stMetric:hover {
-    border-color: #ff4b4b;
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+.big-metric {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
-/* Buttons */
+.metric-change {
+    font-size: 1.1em;
+    color: var(--text-color);
+}
+
+/* Buttons with clear focus states */
 .stButton>button {
-    background-color: #ff4b4b;
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 4px;
     font-weight: 500;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .stButton>button:hover {
@@ -41,56 +95,77 @@ h1, h2, h3 {
     transition: all 0.2s ease;
 }
 
-/* Selectbox */
-.stSelectbox {
-    background-color: #1a1c23;
+.stButton>button:focus {
+    outline: 3px solid white;
+    outline-offset: 2px;
+}
+
+/* Form Controls with Enhanced Accessibility */
+.stSelectbox, .stTextInput {
+    background-color: var(--secondary-background);
     border-radius: 4px;
+    min-height: 44px;
+}
+
+/* Alerts with High Contrast */
+.stAlert {
+    background-color: var(--primary-color);
+    color: white;
+    border: 2px solid white;
+    font-weight: bold;
+}
+
+/* Screen Reader Only Text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Footer with Enhanced Contrast */
+footer {
+    background-color: var(--secondary-background);
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 2rem;
 }
 
 /* Sidebar */
 .css-1d391kg {
-    background-color: #1a1c23;
+    background-color: var(--secondary-background);
 }
 
 /* Cards */
 .stCard {
-    background-color: #1a1c23;
-    border: 1px solid #2d2d2d;
+    background-color: var(--secondary-background);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1rem;
 }
 
 /* Tables */
 .stTable {
-    background-color: #1a1c23;
+    background-color: var(--secondary-background);
     border-radius: 8px;
 }
 
 /* Charts */
 .js-plotly-plot {
-    background-color: #1a1c23;
+    background-color: var(--secondary-background);
     border-radius: 8px;
     padding: 1rem;
 }
 
-/* Alerts */
-.stAlert {
-    background-color: #ff4b4b20;
-    border: 1px solid #ff4b4b;
-    color: white;
-}
 
 /* Expander */
 .streamlit-expanderHeader {
-    background-color: #1a1c23;
-    border: 1px solid #2d2d2d;
+    background-color: var(--secondary-background);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
-}
-
-/* Footer */
-footer {
-    background-color: #1a1c23;
-    padding: 1rem;
-    text-align: center;
-    color: #666;
 }

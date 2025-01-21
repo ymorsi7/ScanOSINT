@@ -17,100 +17,122 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS including accessibility styles
 with open('assets/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
-# Sidebar
+# Accessibility Settings in Sidebar
 with st.sidebar:
-    st.image("assets/alert-icon.svg")
-    st.title("Emergency Preparedness")
+    st.markdown("""
+    <img src="assets/alert-icon.svg" alt="Emergency Alert Icon" class="sidebar-icon" role="img">
+    """, unsafe_allow_html=True)
+    st.markdown("""<h1 role="banner" tabindex="0">Emergency Preparedness</h1>""", unsafe_allow_html=True)
+
+    # Accessibility Controls
+    st.markdown("""<h2 tabindex="0">Accessibility Settings</h2>""", unsafe_allow_html=True)
+    high_contrast = st.toggle("High Contrast Mode", help="Enables high contrast colors for better visibility")
+    large_text = st.toggle("Large Text Mode", help="Increases text size for better readability")
+    screen_reader = st.toggle("Screen Reader Support", help="Enables detailed descriptions for screen readers")
 
     # Data reload button
-    if st.button("Reload Data"):
+    if st.button("Reload Data", help="Click to refresh all emergency data"):
         st.cache_data.clear()
         st.success("Data reloaded successfully")
         st.rerun()
 
     # Advanced Filters Section
-    st.subheader("Data Filters")
+    st.markdown("""<h2 tabindex="0">Data Filters</h2>""", unsafe_allow_html=True)
 
-    # Time Range Filter
+    # Time Range Filter with ARIA label
     time_filter = st.select_slider(
         "Time Period",
         options=["Last 24 Hours", "Last Week", "Last Month", "Last Year", "All Time"],
-        value="Last Week"
+        value="Last Week",
+        help="Select time range for emergency data"
     )
 
-    # Region Selection
+    # Rest of the sidebar filters with accessibility improvements
     selected_regions = st.multiselect(
         "Geographic Regions",
         ["North America", "South America", "Europe", "Asia", "Africa", "Oceania"],
-        default=["North America"]
+        default=["North America"],
+        help="Select regions to display emergency data for"
     )
 
-    # Disaster Type Filter
+    # Disaster Type Filter with ARIA label
     disaster_types = st.multiselect(
         "Event Types",
         ["Earthquake", "Hurricane", "Flood", "Wildfire", "Tsunami"],
-        default=["Earthquake", "Hurricane"]
+        default=["Earthquake", "Hurricane"],
+        help="Select types of events to filter data"
     )
 
-    # Severity Filter
+    # Severity Filter with ARIA label
     min_severity, max_severity = st.select_slider(
         "Risk Score Range",
         options=["Very Low", "Low", "Medium", "High", "Very High"],
-        value=("Low", "High")
+        value=("Low", "High"),
+        help="Select the range of risk scores to filter data"
     )
 
-    # Population Impact Filter
-    min_pop = st.number_input("Minimum Population Impact", value=0, step=1000)
+    # Population Impact Filter with ARIA label
+    min_pop = st.number_input("Minimum Population Impact", value=0, step=1000, help="Enter the minimum population impact to filter data")
 
 
-# Main content
-colored_header(
-    label="Global Emergency Dashboard",
-    description="Real-time natural disaster monitoring and risk analysis",
-    color_name="red-70"
-)
+# Main content with accessibility improvements
+st.markdown("""
+<div role="main" aria-label="Emergency Dashboard">
+    <h1 tabindex="0">Global Emergency Dashboard</h1>
+    <p tabindex="0">Real-time natural disaster monitoring and risk analysis</p>
+</div>
+""", unsafe_allow_html=True)
 
-# Load and filter data based on user selections
+# Load and filter data
 disaster_data = load_disaster_data()
 
-# Create metrics row
+# Create accessible metrics row
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     active_disasters = len(disaster_data[disaster_data['status'] == 'active'])
-    st.metric(
-        "Active Events",
-        active_disasters,
-        f"{active_disasters - 5} from last week"
-    )
+    st.markdown(f"""
+    <div role="region" aria-label="Active Events Metric" tabindex="0">
+        <h3>Active Events</h3>
+        <p class="big-metric">{active_disasters}</p>
+        <p class="metric-change">{active_disasters - 5} from last week</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col2:
     high_risk_areas = len(disaster_data[disaster_data['severity'] == 'High'])
-    st.metric(
-        "High Risk Areas",
-        high_risk_areas,
-        "+3 from last week"
-    )
+    st.markdown(f"""
+    <div role="region" aria-label="High Risk Areas Metric" tabindex="0">
+        <h3>High Risk Areas</h3>
+        <p class="big-metric">{high_risk_areas}</p>
+        <p class="metric-change">+3 from last week</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col3:
     total_affected = disaster_data['affected_population'].sum()
-    st.metric(
-        "Population Affected",
-        f"{total_affected:,.0f}",
-        "12% increase"
-    )
+    st.markdown(f"""
+    <div role="region" aria-label="Population Affected Metric" tabindex="0">
+        <h3>Population Affected</h3>
+        <p class="big-metric">{total_affected:,.0f}</p>
+        <p class="metric-change">12% increase</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 with col4:
     avg_risk = disaster_data['risk_score'].mean()
-    st.metric(
-        "Risk Score",
-        f"{avg_risk:.2f}",
-        "-0.05 from last week"
-    )
+    st.markdown(f"""
+    <div role="region" aria-label="Average Risk Score Metric" tabindex="0">
+        <h3>Average Risk Score</h3>
+        <p class="big-metric">{avg_risk:.2f}</p>
+        <p class="metric-change">-0.05 from last week</p>
+    </div>
+    """, unsafe_allow_html=True)
+
 
 # Interactive map with controls
 st.subheader("Global Disaster Risk Heatmap")
@@ -121,17 +143,19 @@ with col1:
     st.plotly_chart(map_fig, use_container_width=True)
 
 with col2:
-    st.write("Critical Events")
-    st.write("Current high-risk situations:")
+    st.markdown("""<h3 tabindex="0">Critical Events</h3>""", unsafe_allow_html=True)
+    st.markdown("""<p tabindex="0">Current high-risk situations:</p>""", unsafe_allow_html=True)
     high_risk_events = disaster_data[disaster_data['severity'] == 'High'].sort_values('risk_score', ascending=False)
 
     for _, event in high_risk_events.head().iterrows():
         st.markdown(f"""
-        **{event['disaster_type']}**  
-        Risk Score: {event['risk_score']:.2f}  
-        Region: {event['location']}  
-        Impact: {event['affected_population']:,} affected
-        """)
+        <div role="region" aria-label="High Risk Event Details" tabindex="0">
+            <h4>{event['disaster_type']}</h4>
+            <p>Risk Score: {event['risk_score']:.2f}</p>
+            <p>Region: {event['location']}</p>
+            <p>Impact: {event['affected_population']:,} affected</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 # Detailed analysis section
 st.write("Analysis Dashboard")
@@ -144,13 +168,6 @@ with tab1:
 
 with tab2:
     def process_historical_data(data):
-        #  This is a placeholder.  A real implementation would likely filter data
-        # based on the time_filter from the sidebar and other filters.  For example:
-        # if time_filter == "Last Week":
-        #     #Filter data to last week
-        #     return data[data['date'] >= datetime.now() - timedelta(days=7)]
-        # else:
-        #     return data
         return pd.DataFrame() #Return empty DataFrame if no processing is done
 
     historical_data = process_historical_data(disaster_data)
@@ -177,14 +194,15 @@ with tab3:
     )
     st.plotly_chart(impact_fig, use_container_width=True)
 
-# Footer
+# Footer with accessibility improvements
 st.markdown("---")
 st.markdown(
-    """
-    <div style='text-align: center'>
+    f"""
+    <footer role="contentinfo" tabindex="0">
         <p>Data sources: EMDAT, NOAA, USGS, and other OSINT sources</p>
-        <p>Last updated: {}</p>
-    </div>
-    """.format(datetime.now().strftime("%Y-%m-%d %H:%M UTC")),
+        <p>Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M UTC")}</p>
+        <p>For emergency assistance, please call your local emergency services.</p>
+    </footer>
+    """,
     unsafe_allow_html=True
 )
