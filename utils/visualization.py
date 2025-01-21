@@ -3,7 +3,9 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 def create_map(data):
-    """Creates interactive map visualization of disasters"""
+    """
+    Create interactive map visualization of disasters using Plotly
+    """
     # Create figure with secondary y-axis
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
@@ -15,14 +17,9 @@ def create_map(data):
         marker=dict(
             size=10,
             color=data['risk_score'],
-            colorscale='Plasma',
+            colorscale='Viridis',
             showscale=True,
-            colorbar=dict(
-                title='Risk Score',
-                titleside='right',
-                titlefont=dict(color='#e6e6e6'),
-                tickfont=dict(color='#e6e6e6')
-            )
+            colorbar=dict(title='Risk Score')
         ),
         text=data.apply(
             lambda x: f"Type: {x['disaster_type']}<br>"
@@ -42,10 +39,10 @@ def create_map(data):
         lon=data['longitude'],
         z=data['risk_score'],
         radius=30,
-        colorscale='Plasma',
+        colorscale='Viridis',
         showscale=False,
         hoverinfo='skip',
-        opacity=0.4,
+        opacity=0.6,
         name='Risk Heatmap'
     )
 
@@ -56,44 +53,35 @@ def create_map(data):
     # Update layout
     fig.update_layout(
         mapbox=dict(
-            style='mapbox://styles/mapbox/navigation-night-v1',
+            style='carto-darkmatter',
             center=dict(lat=20, lon=0),
             zoom=1.5
         ),
         margin={"r":0,"t":30,"l":0,"b":0},
         height=600,
-        title=dict(
-            text='Global Disaster Risk Heatmap',
-            font=dict(color='#e6e6e6')
-        ),
+        title='Global Disaster Risk Heatmap',
         showlegend=True,
         legend=dict(
             yanchor="top",
             y=0.99,
             xanchor="left",
             x=0.01,
-            bgcolor="rgba(48, 51, 57, 0.8)",
-            font=dict(color='#e6e6e6')
-        ),
-        paper_bgcolor='rgba(48, 51, 57, 0.5)',
-        plot_bgcolor='rgba(48, 51, 57, 0.5)'
+            bgcolor="rgba(255, 255, 255, 0.1)"
+        )
     )
 
     return fig
 
 def create_risk_chart(data):
-    """Creates risk assessment visualization"""
+    """
+    Create risk assessment visualization
+    """
     fig = px.scatter(
         data,
         x='factor',
         y='impact_score',
         size='impact_score',
         color='severity',
-        color_discrete_map={
-            'High': '#ff6b6b',
-            'Medium': '#ffd43b',
-            'Low': '#69db7c'
-        },
         hover_data=['region'],
         title='Risk Assessment Matrix',
         template='plotly_dark'
@@ -103,14 +91,14 @@ def create_risk_chart(data):
         height=500,
         xaxis_title="Risk Factor",
         yaxis_title="Impact Score",
-        paper_bgcolor='rgba(48, 51, 57, 0.5)',
-        plot_bgcolor='rgba(48, 51, 57, 0.3)'
     )
 
     return fig
 
 def create_historical_analysis(data):
-    """Creates historical analysis visualization"""
+    """
+    Create historical analysis visualization
+    """
     if data.empty:
         # Return an empty figure with a message
         fig = go.Figure()
@@ -120,8 +108,7 @@ def create_historical_analysis(data):
             yref="paper",
             x=0.5,
             y=0.5,
-            showarrow=False,
-            font=dict(color='#e6e6e6')
+            showarrow=False
         )
         return fig
 
@@ -131,16 +118,13 @@ def create_historical_analysis(data):
         y='impact_score',
         color='disaster_type',
         title='Historical Disaster Impact Analysis',
-        template='plotly_dark',
-        color_discrete_sequence=px.colors.qualitative.Pastel
+        template='plotly_dark'
     )
 
     fig.update_layout(
         height=500,
         xaxis_title="Year",
         yaxis_title="Impact Score",
-        paper_bgcolor='rgba(48, 51, 57, 0.5)',
-        plot_bgcolor='rgba(48, 51, 57, 0.3)'
     )
 
     return fig

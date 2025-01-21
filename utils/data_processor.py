@@ -7,7 +7,9 @@ import streamlit as st
 
 @st.cache_data(ttl=300)  # Cache for 5 minutes
 def fetch_usgs_data():
-    """Fetches earthquake data from USGS API"""
+    """
+    Fetch real-time earthquake data from USGS
+    """
     url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
     try:
         response = requests.get(url)
@@ -34,7 +36,9 @@ def fetch_usgs_data():
         return pd.DataFrame()
 
 def get_region_from_coordinates(lat, lon):
-    """Maps coordinates to geographical regions"""
+    """
+    Determine region based on coordinates
+    """
     if lat > 15:
         if lon < -30:
             return "North America"
@@ -52,7 +56,9 @@ def get_region_from_coordinates(lat, lon):
 
 @st.cache_data(ttl=300)
 def fetch_gdacs_data():
-    """Fetches disaster alerts from GDACS API"""
+    """
+    Fetch disaster alerts from GDACS
+    """
     url = "https://www.gdacs.org/gdacsapi/api/events/geteventlist/EVENTS.geojson"
     try:
         response = requests.get(url)
@@ -75,7 +81,9 @@ def fetch_gdacs_data():
         return pd.DataFrame()
 
 def calculate_risk_score(row):
-    """Calculates risk score based on severity, status, and population"""
+    """
+    Calculate risk score based on multiple factors
+    """
     severity_scores = {'High': 1.0, 'Medium': 0.6, 'Low': 0.3}
     time_factor = 1.0 if row['status'] == 'active' else 0.5
     population_factor = min(1.0, np.log10(row['affected_population'] + 1) / 6)
@@ -83,7 +91,10 @@ def calculate_risk_score(row):
     return severity_scores[row['severity']] * time_factor * (1 + population_factor)
 
 def load_disaster_data():
-    """Loads and processes disaster data from OSINT sources"""
+    """
+    Load and process disaster data from various OSINT sources
+    Returns processed DataFrame with disaster information
+    """
     # Fetch data from multiple sources
     usgs_data = fetch_usgs_data()
     gdacs_data = fetch_gdacs_data()
@@ -120,7 +131,10 @@ def load_disaster_data():
     return combined_data
 
 def load_risk_data():
-    """Processes risk assessment data by region and disaster type"""
+    """
+    Load and process risk assessment data
+    Returns processed DataFrame with risk information
+    """
     disaster_data = load_disaster_data()
 
     # Aggregate risk data by region and disaster type
@@ -142,7 +156,10 @@ def load_risk_data():
     return pd.DataFrame(risk_factors)
 
 def process_historical_data(df):
-    """Processes historical disaster trends"""
+    """
+    Process historical disaster data
+    Returns a DataFrame with historical trends
+    """
     disaster_data = load_disaster_data()
 
     # Group data by year and disaster type

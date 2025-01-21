@@ -71,7 +71,7 @@ with st.sidebar:
 colored_header(
     label="Global Emergency Dashboard",
     description="Real-time natural disaster monitoring and risk analysis",
-    color_name="blue-70"
+    color_name="red-70"
 )
 
 # Load and filter data based on user selections
@@ -85,8 +85,7 @@ with col1:
     st.metric(
         "Active Events",
         active_disasters,
-        f"{active_disasters - 5} from last week",
-        delta_color="off"
+        f"{active_disasters - 5} from last week"
     )
 
 with col2:
@@ -94,8 +93,7 @@ with col2:
     st.metric(
         "High Risk Areas",
         high_risk_areas,
-        "+3 from last week",
-        delta_color="off"
+        "+3 from last week"
     )
 
 with col3:
@@ -103,8 +101,7 @@ with col3:
     st.metric(
         "Population Affected",
         f"{total_affected:,.0f}",
-        "12% increase",
-        delta_color="off"
+        "12% increase"
     )
 
 with col4:
@@ -112,8 +109,7 @@ with col4:
     st.metric(
         "Risk Score",
         f"{avg_risk:.2f}",
-        "-0.05 from last week",
-        delta_color="off"
+        "-0.05 from last week"
     )
 
 # Interactive map with controls
@@ -148,7 +144,14 @@ with tab1:
 
 with tab2:
     def process_historical_data(data):
-        return pd.DataFrame()
+        #  This is a placeholder.  A real implementation would likely filter data
+        # based on the time_filter from the sidebar and other filters.  For example:
+        # if time_filter == "Last Week":
+        #     #Filter data to last week
+        #     return data[data['date'] >= datetime.now() - timedelta(days=7)]
+        # else:
+        #     return data
+        return pd.DataFrame() #Return empty DataFrame if no processing is done
 
     historical_data = process_historical_data(disaster_data)
     if not historical_data.empty:
