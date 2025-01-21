@@ -1,7 +1,5 @@
 def generate_checklist(disaster_type, household_size, special_needs):
-    """
-    Generate customized emergency preparedness checklist
-    """
+    """Generates customized emergency preparedness checklist"""
     base_items = {
         "Water": f"{household_size * 3} gallons (3 days supply)",
         "Food": f"{household_size * 3} days of non-perishable food",
@@ -82,9 +80,7 @@ def generate_checklist(disaster_type, household_size, special_needs):
     return checklist
 
 def suggest_resources(disaster_type, household_size):
-    """
-    Generate resource allocation suggestions
-    """
+    """Generates resource allocation suggestions"""
     resource_categories = {
         "Essential Supplies": {
             "estimated_cost": household_size * 100,

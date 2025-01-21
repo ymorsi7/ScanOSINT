@@ -144,14 +144,7 @@ with tab1:
 
 with tab2:
     def process_historical_data(data):
-        #  This is a placeholder.  A real implementation would likely filter data
-        # based on the time_filter from the sidebar and other filters.  For example:
-        # if time_filter == "Last Week":
-        #     #Filter data to last week
-        #     return data[data['date'] >= datetime.now() - timedelta(days=7)]
-        # else:
-        #     return data
-        return pd.DataFrame() #Return empty DataFrame if no processing is done
+        return pd.DataFrame()
 
     historical_data = process_historical_data(disaster_data)
     if not historical_data.empty:

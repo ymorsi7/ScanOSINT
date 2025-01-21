@@ -3,9 +3,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 def create_map(data):
-    """
-    Create interactive map visualization of disasters using Plotly
-    """
+    """Creates interactive map visualization of disasters"""
     # Create figure with secondary y-axis
     fig = make_subplots(specs=[[{"secondary_y": True}]])
 
@@ -73,9 +71,7 @@ def create_map(data):
     return fig
 
 def create_risk_chart(data):
-    """
-    Create risk assessment visualization
-    """
+    """Creates risk assessment visualization"""
     fig = px.scatter(
         data,
         x='factor',
@@ -96,9 +92,7 @@ def create_risk_chart(data):
     return fig
 
 def create_historical_analysis(data):
-    """
-    Create historical analysis visualization
-    """
+    """Creates historical analysis visualization"""
     if data.empty:
         # Return an empty figure with a message
         fig = go.Figure()
