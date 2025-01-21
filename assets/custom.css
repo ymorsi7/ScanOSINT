@@ -2,33 +2,33 @@
 
 /* Main container */
 .main {
-    background-color: #0e1117;
+    background-color: #1e2130;
 }
 
 /* Headers */
 h1, h2, h3 {
-    color: #ffffff;
+    color: #e6e6e6;
     font-weight: 600;
 }
 
 /* Metrics */
 .stMetric {
-    background-color: #1a1c23;
+    background-color: #262b3d;
     padding: 1rem;
     border-radius: 8px;
-    border: 1px solid #2d2d2d;
+    border: 1px solid #363c4f;
 }
 
 .stMetric:hover {
-    border-color: #ff4b4b;
+    border-color: #4a84ff;
     transform: translateY(-2px);
     transition: all 0.3s ease;
 }
 
 /* Buttons */
 .stButton>button {
-    background-color: #ff4b4b;
-    color: white;
+    background-color: #4a84ff;
+    color: #e6e6e6;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -36,61 +36,149 @@ h1, h2, h3 {
 }
 
 .stButton>button:hover {
-    background-color: #ff6b6b;
+    background-color: #6596ff;
     transform: translateY(-1px);
     transition: all 0.2s ease;
 }
 
 /* Selectbox */
 .stSelectbox {
-    background-color: #1a1c23;
-    border-radius: 4px;
+    background-color: #262b3d;
 }
 
 /* Sidebar */
 .css-1d391kg {
-    background-color: #1a1c23;
+    background-color: #262b3d;
 }
 
 /* Cards */
 .stCard {
-    background-color: #1a1c23;
-    border: 1px solid #2d2d2d;
+    background-color: #262b3d;
+    border: 1px solid #363c4f;
     border-radius: 8px;
     padding: 1rem;
 }
 
 /* Tables */
 .stTable {
-    background-color: #1a1c23;
+    background-color: #262b3d;
     border-radius: 8px;
 }
 
 /* Charts */
 .js-plotly-plot {
-    background-color: #1a1c23;
+    background-color: #262b3d;
     border-radius: 8px;
     padding: 1rem;
 }
 
 /* Alerts */
 .stAlert {
-    background-color: #ff4b4b20;
-    border: 1px solid #ff4b4b;
-    color: white;
+    background-color: rgba(74, 132, 255, 0.1);
+    border: 1px solid #4a84ff;
+    color: #e6e6e6;
 }
 
 /* Expander */
 .streamlit-expanderHeader {
-    background-color: #1a1c23;
-    border: 1px solid #2d2d2d;
+    background-color: #262b3d;
+    border: 1px solid #363c4f;
     border-radius: 4px;
 }
 
 /* Footer */
 footer {
-    background-color: #1a1c23;
+    background-color: #262b3d;
     padding: 1rem;
     text-align: center;
-    color: #666;
+    color: #8b92a8;
+}
+
+/* Main container styling */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Sidebar styling */
+.css-1d391kg {
+    background-color: rgba(38, 39, 48, 0.8);
+}
+
+/* Metric cards styling */
+div[data-testid="stMetricValue"] {
+    font-size: 2rem !important;
+    color: #e6e6e6 !important;
+}
+
+div[data-testid="stMetricDelta"] {
+    color: #8b92a8 !important;
+}
+
+/* Headers styling */
+h1, h2, h3 {
+    color: #ffffff !important;
+}
+
+/* Tabs styling */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 1rem;
+}
+
+.stTabs [data-baseweb="tab"] {
+    height: 3rem;
+    background-color: #262b3d;
+    border-radius: 4px;
+    color: #e6e6e6;
+    padding: 0 1rem;
+}
+
+.stTabs [aria-selected="true"] {
+    background-color: rgba(74, 132, 255, 0.2) !important;
+}
+
+/* Button styling */
+.stButton > button {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(59, 130, 246, 0.5);
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: rgba(59, 130, 246, 0.4);
+    border-color: rgba(59, 130, 246, 0.8);
+}
+
+/* Select box styling */
+.stSelectbox > div > div {
+    background-color: #262b3d;
+    border-color: rgba(74, 132, 255, 0.3);
+}
+
+/* Slider styling */
+.stSlider > div > div > div {
+    background-color: rgba(74, 132, 255, 0.3);
+}
+
+/* Info box styling */
+.stAlert {
+    background-color: rgba(38, 39, 48, 0.8);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Footer styling */
+footer {
+    color: #a6a6a6;
+    font-size: 0.8rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* Chart container styling */
+[data-testid="stPlotlyChart"] > div {
+    border-radius: 8px;
+    background-color: #262b3d;
+    padding: 1rem;
+    border: 1px solid #363c4f;
 }

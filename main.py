@@ -71,7 +71,7 @@ with st.sidebar:
 colored_header(
     label="Global Emergency Dashboard",
     description="Real-time natural disaster monitoring and risk analysis",
-    color_name="red-70"
+    color_name="blue-70"
 )
 
 # Load and filter data based on user selections
@@ -85,7 +85,8 @@ with col1:
     st.metric(
         "Active Events",
         active_disasters,
-        f"{active_disasters - 5} from last week"
+        f"{active_disasters - 5} from last week",
+        delta_color="off"
     )
 
 with col2:
@@ -93,7 +94,8 @@ with col2:
     st.metric(
         "High Risk Areas",
         high_risk_areas,
-        "+3 from last week"
+        "+3 from last week",
+        delta_color="off"
     )
 
 with col3:
@@ -101,7 +103,8 @@ with col3:
     st.metric(
         "Population Affected",
         f"{total_affected:,.0f}",
-        "12% increase"
+        "12% increase",
+        delta_color="off"
     )
 
 with col4:
@@ -109,7 +112,8 @@ with col4:
     st.metric(
         "Risk Score",
         f"{avg_risk:.2f}",
-        "-0.05 from last week"
+        "-0.05 from last week",
+        delta_color="off"
     )
 
 # Interactive map with controls
