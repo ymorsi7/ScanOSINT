@@ -1,0 +1,96 @@
+/* Custom styling for the emergency preparedness platform */
+
+/* Main container */
+.main {
+    background-color: #0e1117;
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Metrics */
+.stMetric {
+    background-color: #1a1c23;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #2d2d2d;
+}
+
+.stMetric:hover {
+    border-color: #ff4b4b;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.stButton>button:hover {
+    background-color: #ff6b6b;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+/* Selectbox */
+.stSelectbox {
+    background-color: #1a1c23;
+    border-radius: 4px;
+}
+
+/* Sidebar */
+.css-1d391kg {
+    background-color: #1a1c23;
+}
+
+/* Cards */
+.stCard {
+    background-color: #1a1c23;
+    border: 1px solid #2d2d2d;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Tables */
+.stTable {
+    background-color: #1a1c23;
+    border-radius: 8px;
+}
+
+/* Charts */
+.js-plotly-plot {
+    background-color: #1a1c23;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Alerts */
+.stAlert {
+    background-color: #ff4b4b20;
+    border: 1px solid #ff4b4b;
+    color: white;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: #1a1c23;
+    border: 1px solid #2d2d2d;
+    border-radius: 4px;
+}
+
+/* Footer */
+footer {
+    background-color: #1a1c23;
+    padding: 1rem;
+    text-align: center;
+    color: #666;
+}
