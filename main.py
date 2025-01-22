@@ -9,7 +9,7 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from datetime import datetime, timedelta
 
-# Enforce dark theme before any other operation
+# Configure page before any other Streamlit commands
 st.set_page_config(
     page_title="Emergency Preparedness Platform",
     page_icon="🚨",
@@ -22,56 +22,62 @@ st.set_page_config(
     }
 )
 
-# Force dark theme with additional overrides
+# Force dark theme with comprehensive selectors
 st.markdown("""
     <style>
-        /* Force dark theme */
-        :root {
-            color-scheme: dark !important;
-        }
-
-        /* Main container */
-        .main {
+        /* Global dark theme enforcement */
+        html, body {
             background-color: #0e1117 !important;
             color: #fafafa !important;
         }
 
-        /* Streamlit components */
-        .stApp {
+        /* Target all Streamlit containers and their children */
+        div.stApp > * {
             background-color: #0e1117 !important;
         }
 
-        div[data-testid="stAppViewContainer"], 
-        div[data-testid="stSidebarContent"],
-        div[data-testid="stHeader"],
-        div[data-testid="stToolbar"],
-        div[data-testid="stWidgetLabel"],
-        div[data-testid="stMarkdown"] {
+        /* Target emotion cache classes */
+        div[class*="st-emotion-cache-"] {
             background-color: #0e1117 !important;
             color: #fafafa !important;
         }
 
-        /* Metrics and widgets */
-        div[data-testid="stMetricValue"], 
-        div[data-testid="stMetricDelta"],
-        div[data-testid="stSelectbox"] {
-            background-color: #1a1c23 !important;
+        /* Target specific emotion cache classes */
+        .st-emotion-cache-1y4p8pa,
+        .st-emotion-cache-18ni7ap,
+        .st-emotion-cache-1d3w5wq,
+        .st-emotion-cache-1cypcdb,
+        .st-emotion-cache-r421ms,
+        .st-emotion-cache-ue6h4q,
+        .st-emotion-cache-l9bjmx,
+        .st-emotion-cache-164nlkn,
+        .st-emotion-cache-1dp5vir {
+            background-color: #0e1117 !important;
             color: #fafafa !important;
         }
 
-        /* Inputs and form elements */
-        input, select, textarea {
-            background-color: #1a1c23 !important;
+        /* Target all Streamlit elements */
+        [data-testid*="stApp"],
+        [data-testid*="stToolbar"],
+        [data-testid*="stDecoration"],
+        [data-testid*="stMarkdown"],
+        [data-testid*="stHeader"],
+        [data-testid*="stSidebar"] {
+            background-color: #0e1117 !important;
             color: #fafafa !important;
-            border-color: #2d2d2d !important;
         }
 
-        /* Text elements */
-        p, h1, h2, h3, h4, h5, h6, span, div {
+        /* Force dark theme on all elements */
+        * {
+            background-color: #0e1117 !important;
             color: #fafafa !important;
         }
     </style>
 """, unsafe_allow_html=True)
+
+# Load custom CSS with additional dark theme rules
+with open('assets/custom.css') as f:
+    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Add keyboard navigation detection
 st.markdown("""
@@ -91,10 +97,6 @@ st.markdown("""
     Keyboard navigation active
 </div>
 """, unsafe_allow_html=True)
-
-# Custom CSS including accessibility styles
-with open('assets/custom.css') as f:
-    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
 # Accessibility Settings in Sidebar
 with st.sidebar:
