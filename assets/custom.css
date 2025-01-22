@@ -1,12 +1,5 @@
-/* Force dark theme */
-body {
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
-}
-
 /* Dark theme variables */
 :root {
-    color-scheme: dark !important;
     --primary-color: #ff4b4b;
     --background-color: #0e1117;
     --secondary-background: #1a1c23;
@@ -14,163 +7,45 @@ body {
     --border-color: #2d2d2d;
 }
 
-/* Streamlit emotion cache overrides */
+/* Streamlit emotion cache overrides - preserve functionality */
 .st-emotion-cache-1y4p8pa,  /* Main container */
 .st-emotion-cache-18ni7ap,  /* App container */
 .st-emotion-cache-1d3w5wq,  /* Sidebar */
-.st-emotion-cache-1cypcdb,  /* Widget containers */
-.st-emotion-cache-r421ms,   /* Block containers */
-.st-emotion-cache-ue6h4q,   /* Main content */
-.st-emotion-cache-l9bjmx,   /* Markdown text */
-.st-emotion-cache-164nlkn,  /* Headers */
-.st-emotion-cache-1dp5vir { /* Tabs */
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
+.st-emotion-cache-1cypcdb   /* Widget containers */ {
+    background-color: var(--background-color);
 }
 
-/* Additional emotion cache classes for dark theme */
+/* Additional emotion cache classes - preserve functionality */
 .st-emotion-cache-1avcm0n,  /* Secondary background */
-.st-emotion-cache-16idsys,  /* Widgets */
-.st-emotion-cache-1vbkxwb,  /* Inputs */
-.st-emotion-cache-79elbk,   /* Select boxes */
-.st-emotion-cache-1q1n0ol { /* Radio buttons */
-    background-color: var(--secondary-background) !important;
-    color: var(--text-color) !important;
-}
-
-/* Ensure all Streamlit components stay dark */
-.stApp, 
-div[data-testid="stAppViewContainer"],
-div[data-testid="stToolbar"],
-div[data-testid="stDecoration"],
-div[data-testid="stStatusWidget"],
-div[data-testid="stMetricValue"],
-div[data-testid="stSidebarNav"],
-section[data-testid="stSidebar"] {
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
-}
-
-/* Force dark theme on specific Streamlit elements */
-.stTabs [data-testid="stMarkdownContainer"],
-.stButton>button,
-.stDownloadButton>button,
-.stSelectbox>div,
-.stTextInput>div,
-.stSlider>div,
-.stCheckbox>div {
-    background-color: var(--background-color) !important;
-    color: var(--text-color) !important;
-}
-
-/* Plot background colors */
-.js-plotly-plot .plotly,
-.js-plotly-plot .main-svg,
-.js-plotly-plot .plot-container {
-    background-color: var(--background-color) !important;
-}
-
-/* Accessibility Base Styles */
-:root {
-    --primary-color: #ff4b4b;
-    --background-color: #0e1117;
-    --secondary-background: #1a1c23;
-    --text-color: #fafafa;
-    --border-color: #2d2d2d;
-}
-
-/* Emergency Icon Styling */
-.emergency-icon {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 1rem;
-    animation: pulse 2s infinite;
-    color: var(--primary-color);
-}
-
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    100% {
-        opacity: 1;
-    }
-}
-
-/* High Contrast Mode */
-[data-high-contrast="true"] {
-    --primary-color: #ff0000;
-    --background-color: #000000;
-    --secondary-background: #1a1a1a;
-    --text-color: #ffffff;
-    --border-color: #ffffff;
-}
-
-/* Large Text Mode */
-[data-large-text="true"] {
-    font-size: 120% !important;
-    line-height: 1.6 !important;
-}
-
-[data-large-text="true"] h1 {
-    font-size: 2.4em !important;
-}
-
-[data-large-text="true"] h2 {
-    font-size: 2em !important;
-}
-
-[data-large-text="true"] h3 {
-    font-size: 1.8em !important;
-}
-
-/* Focus Styles for Accessibility */
-*:focus {
-    outline: 3px solid var(--primary-color) !important;
-    outline-offset: 2px !important;
-    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary-color) !important;
-    transition: outline-offset .15s ease !important;
-}
-
-/* Skip Navigation Link */
-.skip-nav {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--primary-color);
-    color: white;
-    padding: 8px;
-    z-index: 100;
-    transition: top 0.3s;
-}
-
-.skip-nav:focus {
-    top: 0;
-}
-
-/* Main container */
-.main {
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-/* Override Streamlit's default light theme */
-.stApp {
-    background-color: var(--background-color);
-}
-
-.stSidebar {
+.st-emotion-cache-16idsys   /* Widgets */ {
     background-color: var(--secondary-background);
 }
 
-/* Headers with proper contrast */
-h1, h2, h3 {
-    color: var(--text-color);
-    font-weight: 600;
-    margin: 1em 0 0.5em 0;
+/* Ensure text remains visible */
+.stMarkdown, .stText, h1, h2, h3, h4, h5, h6 {
+    color: var(--text-color) !important;
+}
+
+/* Preserve Plotly chart backgrounds */
+.js-plotly-plot .plotly .main-svg {
+    background: transparent !important;
+}
+
+/* Preserve widget functionality */
+.stSlider > div,
+.stSelectbox > div,
+.stMultiSelect > div {
+    background-color: transparent !important;
+}
+
+/* Emergency Alert Styles */
+.emergency-alert {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    border: 2px solid #ffffff;
 }
 
 /* Metrics with enhanced readability */
@@ -255,20 +130,6 @@ h1, h2, h3 {
     border: 0;
 }
 
-/* Emergency Alert Styles */
-.emergency-alert {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem;
-    border-radius: 4px;
-    margin: 1rem 0;
-    border: 2px solid #ffffff;
-    position: relative;
-}
-
-[data-high-contrast="true"] .emergency-alert {
-    border-width: 3px;
-}
 
 /* Footer with Enhanced Contrast */
 footer {
@@ -312,9 +173,99 @@ footer {
     border-radius: 4px;
 }
 
-/* Dark mode specific overrides */
-.stMarkdown, .stText {
-    color: var(--text-color) !important;
+/* High Contrast Mode */
+[data-high-contrast="true"] {
+    --primary-color: #ff0000;
+    --background-color: #000000;
+    --secondary-background: #1a1a1a;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+}
+
+/* Large Text Mode */
+[data-large-text="true"] {
+    font-size: 120% !important;
+    line-height: 1.6 !important;
+}
+
+[data-large-text="true"] h1 {
+    font-size: 2.4em !important;
+}
+
+[data-large-text="true"] h2 {
+    font-size: 2em !important;
+}
+
+[data-large-text="true"] h3 {
+    font-size: 1.8em !important;
+}
+
+/* Focus Styles for Accessibility */
+*:focus {
+    outline: 3px solid var(--primary-color) !important;
+    outline-offset: 2px !important;
+    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary-color) !important;
+    transition: outline-offset .15s ease !important;
+}
+
+/* Skip Navigation Link */
+.skip-nav {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    z-index: 100;
+    transition: top 0.3s;
+}
+
+.skip-nav:focus {
+    top: 0;
+}
+
+/* Main container */
+.main {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+/* Override Streamlit's default light theme */
+.stApp {
+    background-color: var(--background-color);
+}
+
+.stSidebar {
+    background-color: var(--secondary-background);
+}
+
+/* Headers with proper contrast */
+h1, h2, h3 {
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 1em 0 0.5em 0;
+}
+
+
+/* Emergency Icon Styling */
+.emergency-icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+    color: var(--primary-color);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Keyboard Navigation Indicator */

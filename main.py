@@ -22,60 +22,40 @@ st.set_page_config(
     }
 )
 
-# Force dark theme with comprehensive selectors
+# Force dark theme with selective styling
 st.markdown("""
     <style>
-        /* Global dark theme enforcement */
-        html, body {
-            background-color: #0e1117 !important;
-            color: #fafafa !important;
+        /* Base dark theme */
+        :root {
+            color-scheme: dark !important;
         }
 
-        /* Target all Streamlit containers and their children */
-        div.stApp > * {
-            background-color: #0e1117 !important;
+        /* Main containers */
+        .stApp {
+            background-color: #0e1117;
         }
 
-        /* Target emotion cache classes */
-        div[class*="st-emotion-cache-"] {
-            background-color: #0e1117 !important;
-            color: #fafafa !important;
+        /* Target specific Streamlit containers */
+        [data-testid="stAppViewContainer"],
+        [data-testid="stSidebarContent"],
+        [data-testid="stHeader"] {
+            background-color: #0e1117;
         }
 
-        /* Target specific emotion cache classes */
-        .st-emotion-cache-1y4p8pa,
-        .st-emotion-cache-18ni7ap,
-        .st-emotion-cache-1d3w5wq,
-        .st-emotion-cache-1cypcdb,
-        .st-emotion-cache-r421ms,
-        .st-emotion-cache-ue6h4q,
-        .st-emotion-cache-l9bjmx,
-        .st-emotion-cache-164nlkn,
-        .st-emotion-cache-1dp5vir {
-            background-color: #0e1117 !important;
-            color: #fafafa !important;
+        /* Preserve interactive elements */
+        .element-container:not(.stPlotlyChart) {
+            background-color: #0e1117;
+            color: #fafafa;
         }
 
-        /* Target all Streamlit elements */
-        [data-testid*="stApp"],
-        [data-testid*="stToolbar"],
-        [data-testid*="stDecoration"],
-        [data-testid*="stMarkdown"],
-        [data-testid*="stHeader"],
-        [data-testid*="stSidebar"] {
-            background-color: #0e1117 !important;
-            color: #fafafa !important;
-        }
-
-        /* Force dark theme on all elements */
-        * {
-            background-color: #0e1117 !important;
-            color: #fafafa !important;
+        /* Text elements */
+        .stMarkdown, .stText {
+            color: #fafafa;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Load custom CSS with additional dark theme rules
+# Load custom CSS with additional theme rules
 with open('assets/custom.css') as f:
     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
 
