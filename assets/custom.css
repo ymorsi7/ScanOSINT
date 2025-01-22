@@ -69,14 +69,28 @@ body {
 
 /* Large Text Mode */
 [data-large-text="true"] {
-    font-size: 120%;
-    line-height: 1.5;
+    font-size: 120% !important;
+    line-height: 1.6 !important;
+}
+
+[data-large-text="true"] h1 {
+    font-size: 2.4em !important;
+}
+
+[data-large-text="true"] h2 {
+    font-size: 2em !important;
+}
+
+[data-large-text="true"] h3 {
+    font-size: 1.8em !important;
 }
 
 /* Focus Styles for Accessibility */
 *:focus {
     outline: 3px solid var(--primary-color) !important;
     outline-offset: 2px !important;
+    box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary-color) !important;
+    transition: outline-offset .15s ease !important;
 }
 
 /* Skip Navigation Link */
@@ -187,6 +201,33 @@ h1, h2, h3 {
     border: 0;
 }
 
+/* Screen Reader Announcements */
+.sr-announce {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Emergency Alert Styles */
+.emergency-alert {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+    border: 2px solid #ffffff;
+    position: relative;
+}
+
+[data-high-contrast="true"] .emergency-alert {
+    border-width: 3px;
+}
+
 /* Footer with Enhanced Contrast */
 footer {
     background-color: var(--secondary-background);
@@ -232,4 +273,22 @@ footer {
 /* Dark mode specific overrides */
 .stMarkdown, .stText {
     color: var(--text-color) !important;
+}
+
+/* Keyboard Navigation Indicator */
+.keyboard-nav-indicator {
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    z-index: 1000;
+    display: none;
+}
+
+body[data-keyboard-nav="true"] .keyboard-nav-indicator {
+    display: block;
 }

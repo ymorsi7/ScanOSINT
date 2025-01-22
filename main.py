@@ -9,7 +9,7 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from datetime import datetime, timedelta
 
-# Enforce dark theme
+# Enforce dark theme before any other operation
 st.set_page_config(
     page_title="Emergency Preparedness Platform",
     page_icon="🚨",
@@ -24,18 +24,69 @@ st.set_page_config(
 
 # Force dark theme
 st.markdown("""
-    <script>
-        var checkDarkMode = function() {
-            if (!document.body.classList.contains('dark')) {
-                document.body.classList.add('dark');
-            }
-        };
-
-        if (window.addEventListener) {
-            window.addEventListener('load', checkDarkMode);
-            window.addEventListener('resize', checkDarkMode);
+    <style>
+        /* Force dark theme */
+        [data-testid="stAppViewContainer"], 
+        [data-testid="stSidebarContent"],
+        [data-testid="stHeader"] {
+            background-color: var(--background-color) !important;
+            color: var(--text-color) !important;
         }
-    </script>
+        .st-emotion-cache-18ni7ap {
+            background-color: #0e1117;
+        }
+        .st-emotion-cache-1avcm0n {
+            background-color: #1a1c23;
+        }
+
+        /* Additional dark theme enforcements */
+        .stApp, .main, .element-container, .stMarkdown {
+            background-color: #0e1117 !important;
+            color: #fafafa !important;
+        }
+
+        .stSidebar .sidebar-content {
+            background-color: #1a1c23 !important;
+        }
+
+        /* Ensure all text remains visible */
+        p, h1, h2, h3, h4, h5, h6, span, div {
+            color: #fafafa !important;
+        }
+
+        /* Style metrics and cards in dark theme */
+        div[data-testid="stMetricValue"], 
+        div[data-testid="stMetricDelta"] {
+            background-color: #1a1c23 !important;
+            color: #fafafa !important;
+        }
+
+        /* Ensure input fields are visible in dark mode */
+        input, select, textarea {
+            background-color: #1a1c23 !important;
+            color: #fafafa !important;
+            border-color: #2d2d2d !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Add keyboard navigation detection
+st.markdown("""
+<script>
+    document.body.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.setAttribute('data-keyboard-nav', 'true');
+        }
+    });
+
+    document.body.addEventListener('click', function() {
+        document.body.removeAttribute('data-keyboard-nav');
+    });
+</script>
+
+<div class="keyboard-nav-indicator" role="status" aria-live="polite">
+    Keyboard navigation active
+</div>
 """, unsafe_allow_html=True)
 
 # Custom CSS including accessibility styles
@@ -56,6 +107,19 @@ with st.sidebar:
     high_contrast = st.toggle("High Contrast Mode", help="Enables high contrast colors for better visibility")
     large_text = st.toggle("Large Text Mode", help="Increases text size for better readability")
     screen_reader = st.toggle("Screen Reader Support", help="Enables detailed descriptions for screen readers")
+
+    # Update accessibility settings to apply immediately
+    if high_contrast:
+        st.markdown("""<style>body { attr(data-high-contrast="true"); }</style>""", unsafe_allow_html=True)
+    if large_text:
+        st.markdown("""<style>body { attr(data-large-text="true"); }</style>""", unsafe_allow_html=True)
+    if screen_reader:
+        st.markdown("""
+        <div class="sr-announce" role="alert" aria-live="polite">
+            Emergency preparedness dashboard loaded. Use tab key to navigate through sections.
+        </div>
+        """, unsafe_allow_html=True)
+
 
     # Data reload button
     if st.button("Reload Data", help="Click to refresh all emergency data"):
@@ -119,10 +183,15 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     active_disasters = len(disaster_data[disaster_data['status'] == 'active'])
     st.markdown(f"""
-    <div role="region" aria-label="Active Events Metric" tabindex="0">
+    <div role="region" aria-label="Active Emergency Events" tabindex="0">
         <h3>Active Events</h3>
-        <p class="big-metric">{active_disasters}</p>
-        <p class="metric-change">{active_disasters - 5} from last week</p>
+        <div class="big-metric" aria-live="polite">
+            {active_disasters}
+            <span class="sr-only">active emergency events</span>
+        </div>
+        <div class="metric-change" aria-live="polite">
+            <span aria-label="Change from last week">{active_disasters - 5} from last week</span>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -170,15 +239,27 @@ with col2:
     st.markdown("""<p tabindex="0">Current high-risk situations:</p>""", unsafe_allow_html=True)
     high_risk_events = disaster_data[disaster_data['severity'] == 'High'].sort_values('risk_score', ascending=False)
 
+    st.markdown("""
+<div role="complementary" aria-label="Critical Emergency Events" tabindex="0">
+    <h3>Critical Events</h3>
+    <div class="emergency-alert" role="alert" aria-live="polite">
+        <div class="sr-only">Emergency Alert:</div>
+""", unsafe_allow_html=True)
+
     for _, event in high_risk_events.head().iterrows():
         st.markdown(f"""
-        <div role="region" aria-label="High Risk Event Details" tabindex="0">
+        <div role="article" aria-label="Emergency Event Details" tabindex="0">
             <h4>{event['disaster_type']}</h4>
-            <p>Risk Score: {event['risk_score']:.2f}</p>
-            <p>Region: {event['location']}</p>
-            <p>Impact: {event['affected_population']:,} affected</p>
+            <ul>
+                <li>Risk Level: <span aria-label="Risk Score">{event['risk_score']:.2f}</span></li>
+                <li>Location: {event['location']}</li>
+                <li>Impact: <span aria-label="Number of people affected">{event['affected_population']:,}</span> people affected</li>
+            </ul>
         </div>
         """, unsafe_allow_html=True)
+
+    st.markdown("</div>", unsafe_allow_html=True)
+
 
 # Detailed analysis section
 st.write("Analysis Dashboard")
