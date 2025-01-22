@@ -22,50 +22,53 @@ st.set_page_config(
     }
 )
 
-# Force dark theme
+# Force dark theme with additional overrides
 st.markdown("""
     <style>
         /* Force dark theme */
-        [data-testid="stAppViewContainer"], 
-        [data-testid="stSidebarContent"],
-        [data-testid="stHeader"] {
-            background-color: var(--background-color) !important;
-            color: var(--text-color) !important;
-        }
-        .st-emotion-cache-18ni7ap {
-            background-color: #0e1117;
-        }
-        .st-emotion-cache-1avcm0n {
-            background-color: #1a1c23;
+        :root {
+            color-scheme: dark !important;
         }
 
-        /* Additional dark theme enforcements */
-        .stApp, .main, .element-container, .stMarkdown {
+        /* Main container */
+        .main {
             background-color: #0e1117 !important;
             color: #fafafa !important;
         }
 
-        .stSidebar .sidebar-content {
-            background-color: #1a1c23 !important;
+        /* Streamlit components */
+        .stApp {
+            background-color: #0e1117 !important;
         }
 
-        /* Ensure all text remains visible */
-        p, h1, h2, h3, h4, h5, h6, span, div {
+        div[data-testid="stAppViewContainer"], 
+        div[data-testid="stSidebarContent"],
+        div[data-testid="stHeader"],
+        div[data-testid="stToolbar"],
+        div[data-testid="stWidgetLabel"],
+        div[data-testid="stMarkdown"] {
+            background-color: #0e1117 !important;
             color: #fafafa !important;
         }
 
-        /* Style metrics and cards in dark theme */
+        /* Metrics and widgets */
         div[data-testid="stMetricValue"], 
-        div[data-testid="stMetricDelta"] {
+        div[data-testid="stMetricDelta"],
+        div[data-testid="stSelectbox"] {
             background-color: #1a1c23 !important;
             color: #fafafa !important;
         }
 
-        /* Ensure input fields are visible in dark mode */
+        /* Inputs and form elements */
         input, select, textarea {
             background-color: #1a1c23 !important;
             color: #fafafa !important;
             border-color: #2d2d2d !important;
+        }
+
+        /* Text elements */
+        p, h1, h2, h3, h4, h5, h6, span, div {
+            color: #fafafa !important;
         }
     </style>
 """, unsafe_allow_html=True)

@@ -6,7 +6,7 @@ body {
 
 /* Dark theme variables */
 :root {
-    color-scheme: dark;
+    color-scheme: dark !important;
     --primary-color: #ff4b4b;
     --background-color: #0e1117;
     --secondary-background: #1a1c23;
@@ -14,19 +14,61 @@ body {
     --border-color: #2d2d2d;
 }
 
-/* Dark mode overrides */
-[data-testid="stAppViewContainer"], 
-[data-testid="stSidebarContent"],
-[data-testid="stHeader"] {
+/* Streamlit emotion cache overrides */
+.st-emotion-cache-1y4p8pa,  /* Main container */
+.st-emotion-cache-18ni7ap,  /* App container */
+.st-emotion-cache-1d3w5wq,  /* Sidebar */
+.st-emotion-cache-1cypcdb,  /* Widget containers */
+.st-emotion-cache-r421ms,   /* Block containers */
+.st-emotion-cache-ue6h4q,   /* Main content */
+.st-emotion-cache-l9bjmx,   /* Markdown text */
+.st-emotion-cache-164nlkn,  /* Headers */
+.st-emotion-cache-1dp5vir { /* Tabs */
     background-color: var(--background-color) !important;
     color: var(--text-color) !important;
 }
 
-.stApp {
-    background-color: var(--background-color) !important;
+/* Additional emotion cache classes for dark theme */
+.st-emotion-cache-1avcm0n,  /* Secondary background */
+.st-emotion-cache-16idsys,  /* Widgets */
+.st-emotion-cache-1vbkxwb,  /* Inputs */
+.st-emotion-cache-79elbk,   /* Select boxes */
+.st-emotion-cache-1q1n0ol { /* Radio buttons */
+    background-color: var(--secondary-background) !important;
+    color: var(--text-color) !important;
 }
 
-/* Custom styling for the emergency preparedness platform */
+/* Ensure all Streamlit components stay dark */
+.stApp, 
+div[data-testid="stAppViewContainer"],
+div[data-testid="stToolbar"],
+div[data-testid="stDecoration"],
+div[data-testid="stStatusWidget"],
+div[data-testid="stMetricValue"],
+div[data-testid="stSidebarNav"],
+section[data-testid="stSidebar"] {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Force dark theme on specific Streamlit elements */
+.stTabs [data-testid="stMarkdownContainer"],
+.stButton>button,
+.stDownloadButton>button,
+.stSelectbox>div,
+.stTextInput>div,
+.stSlider>div,
+.stCheckbox>div {
+    background-color: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Plot background colors */
+.js-plotly-plot .plotly,
+.js-plotly-plot .main-svg,
+.js-plotly-plot .plot-container {
+    background-color: var(--background-color) !important;
+}
 
 /* Accessibility Base Styles */
 :root {
